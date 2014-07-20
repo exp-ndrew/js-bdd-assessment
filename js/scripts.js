@@ -54,10 +54,10 @@ var numbersToWords = function(rawInput) {
 											8: "eighty", 
 											9: "ninety" };  
 	
-	var powerWords = {	1000: "thousand",
-											1000000: "million",
-											1000000000: "billion",
-											1000000000000: "trillion"};
+	var powerWords = {	1000: "thousand,",
+											1000000: "million,",
+											1000000000: "billion,",
+											1000000000000: "trillion,"};
 
 	for (var i=0; i<bigArray.length; i++) {
 
@@ -101,7 +101,7 @@ var numbersToWords = function(rawInput) {
 			finalArray.push(onesWords[bigArray[i][l-1]]);
 		}
 
-		//thousands/millions/billions/trillions
+		//for thousands/millions/billions/trillions
 		powerNumber = Math.pow(10,((bigArray.length-i-1) * 3));
 		if (powerNumber >= 1000 && (bigArray[i][0] !== 0 || bigArray[i][1] !== 0 || bigArray[i][2] !== 0)) {
 			finalArray.push(powerWords[powerNumber]);
@@ -113,3 +113,20 @@ var numbersToWords = function(rawInput) {
 
 
 } //end function
+
+$(document).ready (function() {
+
+	$("form#input-form").submit (function(event) {
+		var rawInput = $("input#rawInput").val();
+
+
+		var outputString = numbersToWords(rawInput);
+
+
+		$("#output").text(outputString);
+
+
+		event.preventDefault();
+
+	})
+})
