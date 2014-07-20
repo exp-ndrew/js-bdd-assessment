@@ -2,7 +2,8 @@
 
 <!--
 	author: Andrew Westling 
-	date: 20140719
+	s: 20140719
+	e: 20140720
 	epicodus javascript/bdd assessment
 -->
 
@@ -11,30 +12,53 @@
 			<title>Numbers in Words</title>
 			<link href="css/bootstrap.css" rel="stylesheet" text="text/css">
 			<link href="css/styles.css" rel="stylesheet" text="text/css">
-			<script src="js/jquery1.11.1.js"></script>
+			<script src="js/jquery-1.11.1.js"></script>
+			<script src="js/bootstrap.js"></script>
 			<script src="js/scripts.js"></script>
 		</head>
 		<body>
 			<div class="container">
-				<div class="row">
-				<div class="col-md-3"><!--left-->
-				</div> <!--md3 left-->
 
-				<div class="col-md-6">
+				<!-- input modal -->
+				<div class="modal show">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h4 class="modal-title">Convert a Number to Text</h4>
+				      </div>
+				      <div class="modal-body">
+				        <form role="form">
+				        	<div class="form-group">
+				        		<div class="input-group">
+				        			<label for="rawInput">Enter a number</label>
+				        			<input class="form-control" type="text" id="rawInput" size="19" placeholder="123456">
+				        		</div> <!-- .input-group -->
+				        	</div> <!-- .form-group -->
+				        </form>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="submit" id="inputButton" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Convert</button>
+				      </div> <!-- .modal-body -->
+				    </div> <!-- .modal-content -->
+				  </div> <!-- .modal-dialog -->
+				</div> <!-- .modal -->
 
-					<form role="form">
-						<div class="form-group">
-							<input  class="form-control" type="text" id="rawInput" size="19" maxlength="19">
-						</div> <!--form-group-->
-							<button class="btn btn-success btn-large" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				<!-- output modal -->
 
-				</div> <!-- md6 center -->
+				<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
+				  <div class="modal-dialog modal-sm">
+				    <div class="modal-content">
+				    	<div class="modal-header">
+				        <h4 class="modal-title">Your Number in Text</h4>
+				      </div> <!-- .modal-header -->
 
-				<div class="col-md-3"><!--right-->
-				</div><!-- md3 right-->
-
-				</div> <!--row-->
-			</div> <!--container-->
+				      <div class="modal-body">
+				      	(output goes here)
+				      </div> <!-- .modal-body" -->
+				    </div>
+				  </div>
+				</div>
+			</div> <!-- .container-->
 
 		</body>
 	</html>
