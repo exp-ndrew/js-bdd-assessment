@@ -1,4 +1,5 @@
 var splitter = function(rawInput) {
+
 	var numberArray = rawInput.toString().split("").map(Number);
 	var bigArray = [];
 	var originalLength = numberArray.length;
@@ -17,7 +18,6 @@ var splitter = function(rawInput) {
 
 var numbersToWords = function(rawInput) {
 
-	//first, split up the raw user input into the above format
 	var bigArray = splitter(rawInput);
 
 	var finalArray = [];
@@ -109,7 +109,9 @@ var numbersToWords = function(rawInput) {
 
 	} //end of the for loop
 
-	return finalArray.join(" ");
+	// check if there is a comma at the end of the line and if yes, remove it
+
+	return finalArray.join(" ").replace(/[,]$/,'');
 
 
 } //end function
@@ -117,16 +119,67 @@ var numbersToWords = function(rawInput) {
 $(document).ready (function() {
 
 	$("form#input-form").submit (function(event) {
-		var rawInput = $("input#rawInput").val();
-
-
-		var outputString = numbersToWords(rawInput);
-
-
-		$("#output").text(outputString);
-
 
 		event.preventDefault();
+		var rawInput = $("input#rawInput").val();
+
+		// INPUT VALIDATION
+
+		var errorInstructions = "";
+		
+		// to keep track of validation result so we hide output if it fails
+		var failedValidation = false;
+		
+		// for decimal validation
+		var weRounded = false;
+		$('#we-rounded').text("");
+
+
+		rawInput = rawInput.replace(/[, ]+/g, ''); // remove commas
+
+		if (rawInput.length > 15) {
+				errorInstructions = "Please choose a smaller number.";
+				$('#errorInstructions').text(errorInstructions);
+				$('.alert-modal-sm').modal('show');
+				failedValidation = true;
+				$('.output-modal-lg').modal('hide');
+				
+
+		} else {
+			
+			if (rawInput.indexOf('.') !== -1) {
+				var weRounded = true;
+				rawInput = parseInt(rawInput); // remove decimals
+			}
+
+			if (isNaN(rawInput)) {
+				errorInstructions = "Please enter a number.";
+				$('#errorInstructions').text(errorInstructions);
+				failedValidation = true;
+				$('.alert-modal-sm').modal('show');
+
+				
+			} else if (rawInput <= 0) {
+				errorInstructions = "Please enter a positive number.";
+				$('#errorInstructions').text(errorInstructions);
+				$('.alert-modal-sm').modal('show');
+				failedValidation = true;
+				$('.output-modal-lg').modal('hide');
+
+			}
+		}
+
+		var outputString = numbersToWords(rawInput);
+		if (failedValidation === false) {
+			if (weRounded === true) {
+				$('#we-rounded').text("We rounded your number down.");
+			}
+			$('.output-modal-lg').modal('show');
+			$("#output").text(outputString);
+		} else {
+			$("input#rawInput").val("");
+		}
+
 
 	})
 })

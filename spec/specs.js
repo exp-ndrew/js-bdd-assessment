@@ -47,14 +47,14 @@ describe("numbersToWords", function() {
 	it("returns 'one hundred twenty one' if the user enters 121 (121-199 work)", function() {
 		numbersToWords(121).should.equal("one hundred twenty one");
 	});
-	it("returns 'one thousand' if the user enters 1000 (thousand word is printed; zeros are disregarded)", function() {
+	it("returns 'one thousand' if the user enters 1000 (thousand word is printed; zeros are disregarded; comma is not present at the end of 'thousand,')", function() {
 		numbersToWords(1000).should.equal("one thousand");
 	});
 	it("returns 'eleven thousand' if the user enters 11000 (bigArray[i]'s with [0,0,0] don't get printed)", function() {
 		numbersToWords(11000).should.equal("eleven thousand");
 	});
 	it("returns 'one thousand one' if the user enters 1001 (middle zeroes are evaluated properly after a powerWord)", function() {
-		numbersToWords(1001).should.equal("one thousand one");
+		numbersToWords(1001).should.equal("one thousand, one");
 	});
 	it("returns 'one million' if the user enters 1000000 (million word is printed; zeroes are disregarded)", function() {
 		numbersToWords(1000000).should.equal("one million");
